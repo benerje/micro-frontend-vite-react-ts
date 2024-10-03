@@ -6,7 +6,7 @@ import { dependencies } from "./package.json";
 export default defineConfig(() => {
   return {
     server: {
-      port: 3001,
+      port: 3002,
       fs: {
         allow: [".", "../shared"],
       },
@@ -21,7 +21,15 @@ export default defineConfig(() => {
         exposes: {
           "./remote-app": "./src/App.tsx",
         },
-        remotes: {},
+        remotes: {
+          reduxStore: {
+            type: "module",
+            name: "reduxStore",
+            entry: "http://localhost:3000/remoteEntry.js",
+            entryGlobalName: "reduxStore",
+            shareScope: "default",
+          },
+        },
         shared: {
           react: {
             requiredVersion: dependencies.react,

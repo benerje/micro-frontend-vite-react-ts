@@ -14,23 +14,10 @@ export default defineConfig(() => ({
   plugins: [
     federation({
       name: "host",
-      remotes: {
-        login: {
-          type: "module",
-          name: "login",
-          entry: "http://localhost:3001/remoteEntry.js",
-          entryGlobalName: "login",
-          shareScope: "default",
-        },
-        registration: {
-          type: "module",
-          name: "registration",
-          entry: "http://localhost:3002/remoteEntry.js",
-          entryGlobalName: "registration",
-          shareScope: "default",
-        },
+
+      exposes: {
+        "./store": "./src/store.ts", // Exposing the shared Redux store
       },
-      exposes: {},
       filename: "remoteEntry.js",
       shared: {
         react: {
